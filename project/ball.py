@@ -13,13 +13,16 @@ class Ball:
         self.shape('circle')#5
         self.shapesize(shape.r/10)#6
         self.color(color)#7
-    def move(self,scree_width,screen_height):
+    def move(self,screen_width,screen_height):
         current_x = self.xcor()#1
         new_x = current_x + dx#2
         current_y = self.ycor()
-        new_y = current_y + dy
+        new_y = current_y +dy#,3
         
-        
+        new_x = current_x + self.dx
+        new_y = current_y + self.dy#,3
+
+                
     
         
         
