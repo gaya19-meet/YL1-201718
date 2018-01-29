@@ -1,5 +1,6 @@
+#https://github.com/meet-projects/yl1201718
 from turtle import Turtle
-class Ball:
+class Ball(Turtle):
     def __init__(self,x,y,dx,dy,r,color):
         Turtle.__init__(self)
         self.x = x
@@ -11,7 +12,7 @@ class Ball:
         self.penup()#2
         self.goto(x,y) #3
         self.shape('circle')#5
-        self.shapesize(shape.r/10)#6
+        self.shapesize(self.r/10)#6
         self.color(color)#7
     def move(self,screen_width,screen_height):
         current_x = self.xcor()#1
@@ -27,22 +28,20 @@ class Ball:
         up_side_ball = new_y+ self.r#
         left_side_ball = new_x - self.r#
         down_side_ball = new_y-self.r#
-        turtle.goto(new_x,new_y)#Let the ball go to the new x and y coordinates
+        self.goto(new_x,new_y)#Let the ball go to the new x and y coordinates
         if new_x > screen_width/2:#  right side if new_x is bigger than the screen_width/2, than bounce it up
-            dx = -dx
+            self.dx = -self.dx
         if  new_x < (-1)*screen_width/2:# left side, need explenation!!!!!!!
             
-            dx = -dx
+            self.dx = -self.dx
         if new_y > screen_height/2:#up
-            dy = -dy#### need explenation
+            self.dy = -self.dy#### need explenation
         if new_y < (-1)*screen_height/2:# down
-            dy = -dy
+            self.dy = -self.dy
 
-        ##########agario.py##################
-import turtle
-import time
-import random
-from ball import Ball
+
+
+
             
             
             
