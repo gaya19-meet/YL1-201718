@@ -59,7 +59,7 @@ def check_all_balls_collision():
 				radius_a = ball_a.r
 				radius_b = ball_b.r
 
-				x_coordinate = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS , SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
+				X_coordinate = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS , SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
 				Y_coordinate = random.randint(-SCREEN_HEIGHT + MAXIMUM_BALL_RADIUS , SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS)
  				X_axis_speed = random.randint(MINIMUM_BALL_DX , MAXIMUM_BALL_DX)
  				Y_axis_speed  = random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
@@ -70,8 +70,69 @@ def check_all_balls_collision():
  					X_axis_speed = random.randint(MINIMUM_BALL_DX , MAXIMUM_BALL_DX)
  				while Y_axis_speed == 0:
  					Y_axis_speed  = random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
- 				
+ 				if (ball_a.r > ball_b.r): #ball b is smaller
+ 					ball_b.goto(X_coordinate , Y_coordinate)
+ 					ball_b.dx = X_axis_speed
+ 					ball_b.dy = Y_axis_speed
+ 					ball_b.r = Radius
+ 					ball_b.shapesize(ball_b.r/10)
 
+ 					ball_a.r+=1
+ 					ball_a.shapesize(ball_a.r/10)
+ 				else:
+ 					ball_a.goto(X_coordinate , Y_coordinate)
+ 					ball_a.dx = X_axis_speed
+ 					ball_a.dy = Y_axis_speed
+ 					ball_a.r = Radius
+ 					ball_a.shapesize(ball_a.r/10)
+					ball_b.r+=1
+ 					ball_b.shapesize(ball_b.r/10)
+ #########part 4: Check collision with my ball
+
+def check_myball_collision():
+	for ball in Balls:
+		if collide (MY_BALL , ball):
+			X_coordinate = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS , SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
+			Y_coordinate = random.randint(-SCREEN_HEIGHT + MAXIMUM_BALL_RADIUS , SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS)
+			X_axis_speed = random.randint(MINIMUM_BALL_DX , MAXIMUM_BALL_DX)
+			Y_axis_speed  = random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
+			Radius =  random.randint(MINIMUM_BALL_RADIUS , MAXIMUM_BALL_RADIUS)
+			color = (random.random(), random.random(), random.random()) # geerate random color
+
+			while X_axis_speed == 0:
+				X_axis_speed = random.randint(MINIMUM_BALL_DX , MAXIMUM_BALL_DX)
+			while Y_axis_speed == 0:
+				Y_axis_speed  = random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
+			if (MY_BALL.r > ball.r): #ball b is smaller
+				ball.goto(X_coordinate , Y_coordinate)
+				ball.dx = X_axis_speed
+				ball.dy = Y_axis_speed
+				ball.r = Radius
+				ball.shapesize(ball.r/10)
+				ball.color(color)
+
+				MY_BALL.r+=1
+				MY_BALL.shapesize(MY_BALL.r/10)
+			else:
+				return False
+	return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+turtle.mainloop()
 
 
 
