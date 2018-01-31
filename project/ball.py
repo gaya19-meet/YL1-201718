@@ -8,13 +8,13 @@ class Ball(Turtle):
         self.dx = dx
         self.dy = dy
         self.r = r
-        self.color(color)
         self.penup()#2
         self.goto(x,y) #3
         self.shape('circle')#5
         self.shapesize(self.r/10)#6
         self.color(color)#7
-    def move(self,screen_width,screen_height):
+
+    def move(self,screen_width,screen_height): 
         current_x = self.xcor()#1
         current_y = self.ycor()
                 
@@ -29,15 +29,18 @@ class Ball(Turtle):
         left_side_ball = new_x - self.r#
         down_side_ball = new_y-self.r#
         self.goto(new_x,new_y)#Let the ball go to the new x and y coordinates
-        if new_x > screen_width/2:#  right side if new_x is bigger than the screen_width/2, than bounce it up
+        if right_side_ball > screen_width:#  right side if new_x is bigger than the screen_width/2, than bounce it up
+            self.dx = -self.dx# reverse direction
+            self.clear()
+        if  left_side_ball < (-1)*screen_width:# left side, need explenation!!!!!!!
             self.dx = -self.dx
-        if  new_x < (-1)*screen_width/2:# left side, need explenation!!!!!!!
-            
-            self.dx = -self.dx
-        if new_y > screen_height/2:#up
+            self.clear()
+        if up_side_ball > screen_height:#up
             self.dy = -self.dy#### need explenation
-        if new_y < (-1)*screen_height/2:# down
+            self.clear()
+        if down_side_ball < (-1)*screen_height:# down
             self.dy = -self.dy
+            self.clear()
 
 
 

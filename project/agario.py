@@ -8,15 +8,15 @@ turtle.tracer(0) #2
 turtle.hideturtle()#3
 
 RUNNING = True#4
-SLEEP = 0.0077#4
+SLEEP = 0.05#4
 SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2#4
 SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2#4
 ################part 0 : Creating the Balls###################
-MY_BALL = Ball(2,2,4,4,2,"red")#1
+MY_BALL = Ball(0,0,0,0,30,"red")#1
 
 NUMBER_OF_BALLS = 5#2(1)
 MINIMUM_BALL_RADIUS = 10#2(2).
-MAXIMUM_BALL_RADIUS = 100#2(3)
+MAXIMUM_BALL_RADIUS = 30#2(3)
 MINIMUM_BALL_DX = -5#2(4)
 MAXIMUM_BALL_DX = 5#2(5)
 MINIMUM_BALL_DY = -5#2(6)
@@ -35,9 +35,9 @@ for i in range (NUMBER_OF_BALLS):##########?????
 	Balls.append(ball)
 
 #############Part 1: Move All Balls
-
-for ball in Balls:#1-2
-	ball.move(SCREEN_WIDTH, SCREEN_HEIGHT)#1-2
+def  move_all_ball():
+	for ball in Balls:#1-2
+		ball.move(SCREEN_WIDTH, SCREEN_HEIGHT)#1-2
 
 ##########Part 2: Check for ball collisions
 
@@ -77,7 +77,7 @@ def check_all_balls_collision():
  					ball_b.r = Radius
  					ball_b.shapesize(ball_b.r/10)
 
- 					ball_a.r+=1
+ 					ball_a.r+=5
  					ball_a.shapesize(ball_a.r/10)
  				else:
  					ball_a.goto(X_coordinate , Y_coordinate)
@@ -85,13 +85,13 @@ def check_all_balls_collision():
  					ball_a.dy = Y_axis_speed
  					ball_a.r = Radius
  					ball_a.shapesize(ball_a.r/10)
-					ball_b.r+=1
+					ball_b.r+=5
  					ball_b.shapesize(ball_b.r/10)
  #########part 4: Check collision with my ball
 
 def check_myball_collision():
 	for ball in Balls:
-		if collide (MY_BALL , ball):
+		if collide (MY_BALL , ball):#Write a for-loop to iterate through all the balls
 			X_coordinate = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS , SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
 			Y_coordinate = random.randint(-SCREEN_HEIGHT + MAXIMUM_BALL_RADIUS , SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS)
 			X_axis_speed = random.randint(MINIMUM_BALL_DX , MAXIMUM_BALL_DX)
@@ -103,7 +103,7 @@ def check_myball_collision():
 				X_axis_speed = random.randint(MINIMUM_BALL_DX , MAXIMUM_BALL_DX)
 			while Y_axis_speed == 0:
 				Y_axis_speed  = random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-			if (MY_BALL.r > ball.r): #ball b is smaller
+			if (MY_BALL.r > ball.r): #ball is smaller
 				ball.goto(X_coordinate , Y_coordinate)
 				ball.dx = X_axis_speed
 				ball.dy = Y_axis_speed
@@ -117,20 +117,25 @@ def check_myball_collision():
 				return False
 	return True
 
+####Part 5: Movearound#####################3
+def movearound(event): #Create a function called movearound that takes an argument event
+	X_coordinate = event.x - SCREEN_WIDTH
+	Y_coordinate = SCREEN_HEIGHT - event.y
+	MY_BALL.goto(X_coordinate , Y_coordinate)
+
+######Part 5.1: Move it!
+turtle.getcanvas().bind("<Motion>", movearound)#call the function movearound everytime the mouse moves by adding this line to my code
+turtle.getscreen().listen()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+####Part 6: The While Loop
+while (RUNNING):
+	move_all_ball()#. Move all the balls in the game and then check for any collisions between all balls
+	check_all_balls_collision()#. Move all the balls in the game and then check for any collisions between all balls
+	RUNNING = check_myball_collision()
+	turtle.getscreen().update()
+	time.sleep(SLEEP)
 
 turtle.mainloop()
 
