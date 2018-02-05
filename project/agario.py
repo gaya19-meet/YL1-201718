@@ -11,6 +11,8 @@ RUNNING = True#4
 SLEEP = 0.05#4
 SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2#4
 SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2#4
+turtle.bgpic("large.gif")
+
 ################part 0 : Creating the Balls###################
 MY_BALL = Ball(0,0,0,0,30,"red")#1
 
